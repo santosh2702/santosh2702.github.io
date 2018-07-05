@@ -16,11 +16,11 @@ h1 {
 	color: #2d3033;
 }
 h2 {
-	font-size: 40px;
+	font-size: 30px;
 	color: #2d3033;
 }
 h3 {
-	font-size: 28px;
+	font-size: 20px;
 	color: #2d3033;
 	font-weight: 300;
 }
@@ -36,20 +36,22 @@ h5 {
 	font-weight: 700;
 }
 .btn {
-	border: 1px solid rgba(0, 0, 0, 0.75);
+	border: 1px white rgba(0, 0, 0, 0.75);
 	margin-top: 20px;
-	color: #2a2a2a;
-	font-size: 12px;
+	color: white;
+	font-size: 14px;
 	font-weight: 400;
-	letter-spacing: 1px;
+	letter-spacing: 0px;
 	border-radius: 0px;
-	padding: 1.5% 3%;
+	padding: 1.8% 3%;
 	display: inline-block;
 	text-transform: uppercase;
+	background-color: darkgoldenrod;
 }
 .btn:hover, .btn:focus {
-	background-color: #2a2a2a;
-	color: #fff;
+	background-color: inherit;
+	border-color:white;
+	color: white;
 }
 .btn-large {
 	padding: 15px 40px;
@@ -70,7 +72,7 @@ a:hover, a:focus {
 body {
 	font-family: "Open Sans", sans-serif;
 	font-weight: 400;
-	color: #6c7279;
+	color: green;
 }
 ul, ol {
 	margin: 0;
@@ -108,15 +110,15 @@ ul li {
 	transition: padding 0.3s;
 }
 #header .logo {
-	font-size: 27px;
-	color: #000;
-	letter-spacing: 3px;
-	font-weight: 300;
+	font-size: 30px;
+	color: black;
+	letter-spacing: 2px;
+	font-weight: 600;
 	float: left;
 	text-transform: uppercase;
 }
 #header.fixed {
-	background-color: rgba(255, 255, 255, 0.75);
+	background-color: green;
 }
 #header.fixed .header-content {
 	border-bottom: 0;
@@ -127,12 +129,13 @@ ul li {
 }
 .navigation.open {
 	opacity: 0.9;
-	visibility: visible;
+	visibility: hidden;
 	-moz-transition: opacity 0.5s;
 	-o-transition: opacity 0.5s;
 	-webkit-transition: opacity 0.5s;
 	transition: opacity 0.5s;
 }
+
 .navigation {
 	float: right;
 }
@@ -140,14 +143,14 @@ ul li {
 	display: inline-block;
 }
 .navigation a {
-	color: #808080;
-	font-size: 13px;
-	font-weight: 300;
-	letter-spacing: 2px;
+	color: black;
+	font-size: 14px;
+	font-weight: 800;
+	letter-spacing: 1px;
 	margin-left: 40px;
 }
 .navigation a:hover, .navigation a.active {
-	color: #262626;
+	color: black;
 }
 .nav-toggle {
 	display: none;
@@ -299,21 +302,21 @@ ul li {
 	min-height: 750px;
 }
 .banner-inner-wrapper {
-	float: right;
+	float: left;
 }
 .banner-text {
 	padding-top: 45%;
 }
 .banner-text h1 {
-	color: #393939;
+	color: white;
 	font-family: "Open Sans", sans-serif;
-	font-size: 23px;
-	font-weight: 400;
+	font-size: 30px;
+	font-weight: 500;
 }
 .banner-text p {
-	color: #393939;
+	color: black;
 	font-size: 15px;
-	font-weight: 300;
+	font-weight: 400;
 	line-height: 1.5;
 	margin-bottom: 1%;
 }
