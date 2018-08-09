@@ -13,7 +13,7 @@ p {
 }
 h1 {
 	font-size: 65px;
-	color: #2d3033;
+	color: black;
 }
 h2 {
 	font-size: 30px;
@@ -308,7 +308,7 @@ ul li {
 	padding-top: 45%;
 }
 .banner-text h1 {
-	color: white;
+	color: black;
 	font-family: "Open Sans", sans-serif;
 	font-size: 30px;
 	font-weight: 500;
