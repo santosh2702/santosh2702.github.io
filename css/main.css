@@ -8,7 +8,7 @@
 -------------------------------------------------------------------------------*/
 p {
 	font-size: 14px;
-	line-height: 22.4px;
+	line-height: 22px;
 	color: #6c7279;
 }
 h1 {
@@ -37,24 +37,24 @@ h5 {
 }
 .btn {
 	border: 1px white rgba(0, 0, 0, 0.75);
-	margin-top: 20px;
-	color: white;
+	margin-top: 10px;
+	color: black;
 	font-size: 14px;
 	font-weight: 400;
 	letter-spacing: 0px;
 	border-radius: 0px;
-	padding: 1.8% 3%;
+	padding: 12px 25px;
 	display: inline-block;
 	text-transform: uppercase;
-	background-color: darkgoldenrod;
+	background-color: goldenrod;
 }
 .btn:hover, .btn:focus {
-	background-color: inherit;
+	background-color: coral;
 	border-color:white;
-	color: white;
+	color: black;
 }
 .btn-large {
-	padding: 15px 40px;
+	padding: 10px 20px;
 }
 /* ------------------------------------------------------------------------------
 	 General Style
@@ -118,18 +118,18 @@ ul li {
 	text-transform: uppercase;
 }
 #header.fixed {
-	background-color: green;
+	background-color: darkgoldenrod ;
 }
 #header.fixed .header-content {
 	border-bottom: 0;
-	padding: 25px 0;
+	padding: 10px 0;
 }
 #header.fixed .nav-toggle {
-	top: 18px;
+	top: 15px;
 }
 .navigation.open {
 	opacity: 0.9;
-	visibility: hidden;
+	visibility: visible;
 	-moz-transition: opacity 0.5s;
 	-o-transition: opacity 0.5s;
 	-webkit-transition: opacity 0.5s;
@@ -144,9 +144,9 @@ ul li {
 }
 .navigation a {
 	color: black;
-	font-size: 14px;
+	font-size: 18px;
 	font-weight: 800;
-	letter-spacing: 1px;
+	letter-spacing: 0px;
 	margin-left: 40px;
 }
 .navigation a:hover, .navigation a.active {
