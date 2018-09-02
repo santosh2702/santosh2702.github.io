@@ -44,9 +44,9 @@ h5 {
 	letter-spacing: 0px;
 	border-radius: 0px;
 	padding: 12px 25px;
-	display: block;
+	display: inline-block;
 	text-transform: uppercase;
-	background-color: grey;
+	background-color: pink;
 }
 .btn:hover, .btn:focus {
 	background-color: coral;
