@@ -1,312 +1,411 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
-<!--[if gt IE 8]><!-->
-
-
-<html class="no-js" lang="">
-<!--<![endif]-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>D3XT3R</title>
-   <link rel="shortcut icon" href="images/sam.ico">
-   <link rel="apple-touch-icon" href="images/sam.png">
-   <link rel="icon" sizes="144x144" href="images/sam.png">
-
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/jquery.fancybox.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/animate.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <meta charset="utf-8">
+  <meta name="description" content="Portfolio of Santosh Kumar, Software Engineer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeuraNest</title>
+  <link rel="shortcut icon" href="images/sam.ico">
+  <link rel="apple-touch-icon" href="images/sam.png">
+  <link rel="icon" sizes="144x144" href="images/sam.png">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <style>
+    body {
+      background-color: #0d0d1a;
+      color: #e0e0ff;
+      font-family: 'Courier New', monospace;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    body.light-mode {
+      background-color: #f0f0ff;
+      color: #1a1a33;
+    }
+    .banner {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(0, 255, 255, 0.3));
+      overflow: hidden;
+    }
+    #particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .banner-content {
+      z-index: 1;
+    }
+    .work-box {
+      background: #1a1a33;
+      border: 2px solid #ff1493;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+    .work-box:hover {
+      transform: translateY(-10px) rotateX(10deg);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+    }
+    .work-box img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .overlay {
+      background: rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .work-box:hover .overlay {
+      opacity: 1;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .typing-text::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+    .glitch {
+      position: relative;
+      animation: glitch 2s infinite;
+    }
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-2px, 0); }
+      80% { transform: translate(2px, 2px); }
+      100% { transform: translate(0); }
+    }
+  </style>
 </head>
-
 <body>
-<!-- Header Section -->
- <!--<iframe src="http://free.timeanddate.com/clock/i6b6y858/n176/fn7/fs20/tct/pct/ftb/th2" frameborder="0" width="128" height="30" allowTransparency="true"></iframe>-->
-  
-
-<section class="banner" role="banner">  <!-- Navigation Section -->
-  <header id="header">
-    <div class="header-content clearfix"> <a class="logo" href="#">CODE-O-FOLIO</a>
-    	<div class="container">
-      <nav class="navigation" role="navigation">
-        <ul class="primary-nav">
-
-          <li><a href="#introduction">About Me</a></li>
-          <li><a href="#works">Latest Works</a></li>
-          <li><a href="#contact">Contact Me</a></li>
-        </ul>
-      </nav>
-      <a href="#" class="nav-toggle">Menu<span></span></a> </div>
-  </header>
-  <!-- Navigation Section --> 
-  <!-- Banner Section -->
-
-  <div class="container">
-    <div class="col-md-7 banner-inner-wrapper">
-      <div class="banner-text">
-        <h1>I'm Santosh Kumar Software Engineer</h1>
-        <p>My Portfolio</p>
-        <a href="https://www.polywork.com/d3xt" class="btn">Find out more</a> </div>
-      <!-- banner text --> 
+  <!-- Header Section -->
+  <section class="banner" role="banner">
+    <canvas id="particles"></canvas>
+    <header class="w-full fixed top-0 bg-black bg-opacity-90 z-50">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <a class="logo text-3xl font-bold text-cyan-300 glitch" href="#">NeuraNest</a>
+        <nav class="navigation">
+          <ul class="primary-nav flex space-x-6 text-lg">
+            <li><a href="#introduction" class="text-cyan-300 hover:text-pink-500 transition">About Me</a></li>
+            <li><a href="#works" class="text-cyan-300 hover:text-pink-500 transition">Latest Works</a></li>
+            <li><a href="#activity" class="text-cyan-300 hover:text-pink-500 transition">Activity</a></li>
+            <li><a href="#contact" class="text-cyan-300 hover:text-pink-500 transition">Contact Me</a></li>
+            <li><button id="theme-toggle" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-moon-o"></i></button></li>
+          </ul>
+        </nav>
+        <a href="#" class="nav-toggle md:hidden text-cyan-300">Menu<span></span></a>
+      </div>
+    </header>
+    <div class="container mx-auto px-4 flex items-center banner-content">
+      <div class="banner-text max-w-lg fade-in">
+        <h1 class="text-4xl md:text-5xl font-bold text-cyan-300 mb-4 typing-text" id="tagline">Crafting Tomorrow’s Code with a Cosmic Spark</h1>
+        <p class="text-lg text-pink-300 mb-6">Dive into My Neural Universe</p>
+        <a href="https://www.polywork.com/d3xt" class="btn bg-pink-500 text-white px-6 py-3 rounded-lg hover:bg-cyan-500 transition">Explore Now</a>
+      </div>
     </div>
-  </div>
-</div>
-  <!-- Banner Section --> 
-</section>
-<!-- Header Section --> 
-<!-- Intro Section -->
-<section class="banner3" role="banner3"> 
-<section id="introduction" class="section introduction">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-sm-6">
-        <div class="intro-content">
-          <h1>About Me</h1>
-                     <div class="col-lg-3"><img height="250px" width="250px" class="bounded-circle" src="https://wallpapers.com/images/hd/snowy-mountain-hgzp49o0pwbx5muu.webp"></div>
+  </section>
 
-        </div>
-      </div>
-      <div class="col-md-5 col-sm-4">
+  <!-- Intro Section -->
+  <section id="introduction" class="py-16 bg-gradient-to-b from-black to-gray-900 fade-in">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="intro-content">
-          <p> <b>Currently Workng in a MNC on .net Technology with various Clients.</b>
-</p>
-          <p></p>
-
+          <h1 class="text-3xl font-bold text-cyan-300 mb-4 glitch">About Me</h1>
+          <img class="rounded-full w-64 h-64 object-cover mx-auto border-2 border-pink-500" src="images/profile.jpg" alt="Profile Image">
         </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
         <div class="intro-content">
-          <h4>My Expertise</h4>
-          <ul>
-            <li> - Python</li>
-            <li> - Machine learning</li>
-            <li> - Problem Solving</li> 
-            <li> - Tools</li>
-            <li> - Gaming</li>
+          <p class="text-lg text-pink-300 mb-4"><b>Engineering the future at an MNC with .NET and cutting-edge tech.</b></p>
+          <p class="text-gray-400">I thrive on crafting innovative solutions and solving complex problems in software development.</p>
+        </div>
+        <div class="intro-content">
+          <h4 class="text-xl font-semibold text-cyan-300 mb-4">My Expertise</h4>
+          <ul class="list-disc list-inside text-pink-300">
+            <li>Python</li>
+            <li>Machine Learning</li>
+            <li>Problem Solving</li>
+            <li>Tools</li>
+            <li>Gaming</li>
           </ul>
         </div>
       </div>
     </div>
-  </div>
-</section>
-</section>
-<!-- Intro Section --> 
+  </section>
 
-<!-- work section -->
-<div class="col-md-15 col-sm-15">
- <div class="intro-content">
- 	 <div class="container">
-    <div class="row">
-          <hr color="black">
-  </hr>
-<h2>Latest Work</h2>
-<section id="works" class="works section no-padding">
-  <div class="container-fluid">
-    <div class="row no-gutter">
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="sam2702.github.io/Screenshot (126).png" class="work-box"> <img src="sam2702.github.io/Screenshot (126).png" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
+  <!-- Work Section -->
+  <section id="works" class="py-16 bg-black fade-in">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-cyan-300 mb-8 glitch">Latest Work</h2>
+      <hr class="border-pink-500 mb-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- ConsciousApp -->
+        <div class="work-box relative rounded-lg overflow-hidden">
+          <a href="https://github.com/santosh2702/ConsciousApp" target="_blank">
+            <img src="images/consciousapp.jpg" alt="ConsciousApp futuristic UI">
+            <div class="overlay absolute inset-0 flex items-center justify-center">
+              <div class="overlay-caption">
+                <i class="fa fa-search-plus fa-2x text-cyan-300"></i>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-semibold text-pink-300">ConsciousApp</h3>
+              <p class="text-gray-400 text-sm">A futuristic UI for mood tracking, dream journaling, and social sharing on X and Instagram.</p>
+            </div>
+          </a>
         </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-2.jpg" class="work-box"> <img src="images/work-2.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
+        <!-- ConnectSphere -->
+        <div class="work-box relative rounded-lg overflow-hidden">
+          <a href="https://github.com/santosh2702/ConnectSphere" target="_blank">
+            <img src="images/connectsphere.jpg" alt="ConnectSphere network visualization">
+            <div class="overlay absolute inset-0 flex items-center justify-center">
+              <div class="overlay-caption">
+                <i class="fa fa-search-plus fa-2x text-cyan-300"></i>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-semibold text-pink-300">ConnectSphere</h3>
+              <p class="text-gray-400 text-sm">A skill-sharing platform with React, TypeScript, and Supabase, featuring AI-driven matchmaking.</p>
+            </div>
+          </a>
         </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-3.png" class="work-box"> <img src="images/work-3.png" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
+        <!-- Reality Glitch Detector -->
+        <div class="work-box relative rounded-lg overflow-hidden">
+          <a href="https://github.com/santosh2702/RealityGlitchDetector" target="_blank">
+            <img src="images/realityglitch.jpg" alt="Reality Glitch Detector space analytics">
+            <div class="overlay absolute inset-0 flex items-center justify-center">
+              <div class="overlay-caption">
+                <i class="fa fa-search-plus fa-2x text-cyan-300"></i>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-semibold text-pink-300">Reality Glitch Detector</h3>
+              <p class="text-gray-400 text-sm">A Chart.js tool to detect anomalies in real-world data like planetary orbits.</p>
+            </div>
+          </a>
         </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-4.png" class="work-box"> <img src="images/work-4.png" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
+        <!-- EarthSim -->
+        <div class="work-box relative rounded-lg overflow-hidden">
+          <a href="https://github.com/santosh2702/EarthSim" target="_blank">
+            <img src="images/earthsim.jpg" alt="EarthSim global simulation">
+            <div class="overlay absolute inset-0 flex items-center justify-center">
+              <div class="overlay-caption">
+                <i class="fa fa-search-plus fa-2x text-cyan-300"></i>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-semibold text-pink-300">EarthSim</h3>
+              <p class="text-gray-400 text-sm">A simulation modeling countries with methods for governance and economy.</p>
+            </div>
+          </a>
         </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-5.png" class="work-box"> <img src="images/work-5.png" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-6.png" class="work-box"> <img src="images/work-6.png" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-7.png" class="work-box"> <img src="images/work-7.png" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-8.jpg" class="work-box"> <img src="images/work-8.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-9.jpg" class="work-box"> <img src="images/work-9.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-10.png" class="work-box"> <img src="images/work-10.png" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-11.jpg" class="work-box"> <img src="images/work-11.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 work"> <a href="images/work-12.jpg" class="work-box"> <img src="images/work-12.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <p><i class="fa fa-search-plus fa-2x"></i></p>
-          </div>
-        </div>
-    </div></div>
-        <!-- overlay --> 
-        </a> </div>
-    </div>
-  </div>
-</section>
-<!-- work section --> 
-<div class="wrapper row4 bgded overlay" style="background-image:url('');">
-  <footer id="footer" class="hoc clear"> 
-<!-- footer section -->
-<footer id="contact" class="footer">
-  <div class="container">
-    <div class="col-md-5 col-sm-4">
-
- <div class="container">
-        <hr color="black">
-      <div class="text-center">
-      <h2 align="center">Contacts</h2>
-       <p> New Delhi,india <br>
-        Email : <a href="Singh.santosh2702@gmail.com"> singh.santosh2702@gmail.com </a></p>
-     <!--
-      <form>
-  <div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationServer01">First name</label>
-      <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
-      <div class="valid-feedback">
-      </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationServer02">Last name</label>
-      <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name"  required>
-      <div class="valid-feedback">
-      </div>
-    </div>
-    <div class="col-md-4 mb-3">
-      <label for="validationServerUsername">Mail</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-        </div>
-        <input type="text" class="form-control is-valid" id="validationServerUsername" placeholder="mail" aria-describedby="inputGroupPrepend3" required>
-        <div class="invalid-feedback">
+        <!-- Movie & Series Website -->
+        <div class="work-box relative rounded-lg overflow-hidden">
+          <a href="https://github.com/santosh2702/MovieSeriesWebsite" target="_blank">
+            <img src="images/movieseries.jpg" alt="Movie and Series streaming UI">
+            <div class="overlay absolute inset-0 flex items-center justify-center">
+              <div class="overlay-caption">
+                <i class="fa fa-search-plus fa-2x text-cyan-300"></i>
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-lg font-semibold text-pink-300">Movie & Series Website</h3>
+              <p class="text-gray-400 text-sm">A Spotify-like UI for movies and series with Bollywood/Hollywood filters.</p>
+            </div>
+          </a>
         </div>
       </div>
     </div>
-  </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input is-valid" type="checkbox" value="" id="invalidCheck3" required>
-      <label class="form-check-label" for="invalidCheck3">
-        Agree to terms and conditions
-      </label>
-      <div class="invalid-feedback">
-        
+  </section>
+
+  <!-- Activity Section -->
+  <section id="activity" class="py-16 bg-gradient-to-b from-gray-900 to-black fade-in">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-cyan-300 mb-8 glitch">Recent Activity</h2>
+      <hr class="border-pink-500 mb-8">
+      <div id="github-activity" class="text-pink-300"></div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer id="contact" class="py-16 bg-black fade-in">
+    <div class="container mx-auto px-4">
+      <hr class="border-pink-500 mb-8">
+      <h2 class="text-3xl font-bold text-center text-cyan-300 mb-8 glitch">Contacts</h2>
+      <div class="text-center text-pink-300">
+        <p>New Delhi, India<br>
+        Email: <a href="mailto:singh.santosh2702@gmail.com" class="text-cyan-300 hover:underline">singh.santosh2702@gmail.com</a></p>
+        <p id="live-clock" class="mt-4 text-sm"></p>
+      </div>
+      <div class="mt-8 text-center">
+        <h4 class="text-xl font-semibold text-cyan-300 mb-4">Social Presence</h4>
+        <div class="flex justify-center space-x-4 flex-wrap gap-4">
+          <a href="https://github.com/santosh2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-github fa-2x"></i></a>
+          <a href="https://www.linkedin.com/in/santosh-kumar-234823133/" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-linkedin fa-2x"></i></a>
+          <a href="https://codepen.io/dashboard/" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-codepen fa-2x"></i></a>
+          <a href="https://www.facebook.com/ssantosh2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-facebook fa-2x"></i></a>
+          <a href="https://www.freecodecamp.org/sam2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-free-code-camp fa-2x"></i></a>
+          <a href="https://www.producthunt.com/@santosh2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-product-hunt fa-2x"></i></a>
+          <a href="https://leetcode.com/santosh2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-code fa-2x"></i></a>
+          <a href="https://www.instagram.com/santosh2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-instagram fa-2x"></i></a>
+          <a href="https://x.com/Santosh36575299" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-twitter fa-2x"></i></a>
+          <a href="https://medium.com/@santosh2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-medium fa-2x"></i></a>
+          <a href="https://g.dev/santosh2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-google fa-2x"></i></a>
+        </div>
       </div>
     </div>
-  </div>
-  <button class="btn btn-success btn-xs" type="submit">Submit form</button>
-</form>
--->
-</div>
-</div>
-</hr>
-<div class="container">
-  <center>
- <h4>Social presense</h4>
-  <div class="btn-group btn-group-lg" role="group" aria-label="...">
-<a href="https://github.com/santosh2702" target="_blank" class="btn btn-default"><p><i class="fa fa-github" aria-hidden="true"></i> GitHub</p></a>
-<a href="https://www.linkedin.com/in/santosh-kumar-234823133/" target="_blank" class="btn btn-default"><p><i class="fa fa-linkedin" aria-hidden="true"></i> linkedin</p></a>
-<a href="https://codepen.io/dashboard/" target="_blank" class="btn btn-default"><p><i class="fa fa-codepen" aria-hidden="true"></i> codepen</p></a>
-<a href="https://www.facebook.com/ssantosh2702" target="_blank" class="btn btn-default"><p><i class="fa fa-facebook" aria-hidden="true"></i> facebook</p></a>
-<a href="https://www.freecodecamp.org/sam2702" target="_blank" class="btn btn-default"><p><i class="fa fa-free-code-camp" aria-hidden="true"></i> freecodecamp</p></a>
-</div>
-</div>
+  </footer>
 
+  <!-- Inline JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script>
+    // Particle Animation
+    const canvas = document.getElementById('particles');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      const particles = [];
+      for (let i = 0; i < 100; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 2 + 1,
+          vx: Math.random() * 2 - 1,
+          vy: Math.random() * 2 - 1,
+          color: `rgba(0, ${Math.random() * 255}, 255, 0.5)`
+        });
+      }
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.fill();
+        });
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+      window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    }
 
-      <!--<h2>Contact</h2>
-      <p> New Delhi,india <br>
-        Email : <a href="Singh.santosh2702@gmail.com"> singh.santosh2702@gmail.com </a></p>
-    </div>
-    <div class="col-md-6">
-      <h4>Social presense</h4>
-      <ul class="footer-share">
-        <li><a href="https://www.facebook.com/ssantosh2702"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="https://twitter.com/Santosh36575299"><i class="fa fa-twitter"></i></a></li>
-        <li><a href="https://www.linkedin.com/in/santosh-kumar-234823133/"><i class="fa fa-linkedin"></i></a></li>
-        <li><a href="https://www.quora.com/profile/Santosh-Kumar-7887"><i class="fa fa-quora"></i></a></li>
-        <li><a href="https://github.com/sam2702"><i class="fa fa-github"></i></a></li>
-      </ul>
-    </div>
-    <div class="col-md-5">
-      <p><br>
-         <i class="fa fa-github</a></p>
-    </div>
-  </div>
-</footer> -->
-<!-- footer section --> 
+    // Typing Effect
+    const tagline = "Crafting Tomorrow’s Code with a Cosmic Spark";
+    let i = 0;
+    const taglineElement = document.getElementById("tagline");
+    if (taglineElement) {
+      function typeWriter() {
+        if (i < tagline.length) {
+          taglineElement.innerText = tagline.slice(0, i + 1);
+          i++;
+          setTimeout(typeWriter, 100);
+        }
+      }
+      typeWriter();
+    }
 
-<!-- JS FILES --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/jquery.fancybox.pack.js"></script> 
-<script src="js/retina.min.js"></script> 
-<script src="js/modernizr.js"></script> 
-<script src="js/main.js"></script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        themeToggle.innerHTML = isLight ? '<i class="fa fa-moon-o"></i>' : '<i class="fa fa-sun-o"></i>';
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      });
+      if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        themeToggle.innerHTML = '<i class="fa fa-moon-o"></i>';
+      }
+    }
+
+    // Live Clock
+    const clockElement = document.getElementById('live-clock');
+    if (clockElement) {
+      function updateClock() {
+        const now = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+        clockElement.innerText = `Current Time: ${now}`;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+    }
+
+    // GitHub Activity Feed
+    const activityContainer = document.getElementById('github-activity');
+    if (activityContainer) {
+      fetch('https://api.github.com/users/santosh2702/events?per_page=5')
+        .then(response => {
+          if (!response.ok) throw new Error('GitHub API request failed');
+          return response.json();
+        })
+        .then(data => {
+          if (!Array.isArray(data) || data.length === 0) {
+            activityContainer.innerHTML = '<p>No recent activity found.</p>';
+            return;
+          }
+          const activityList = data.map(event => {
+            let action = '';
+            if (event.type === 'PushEvent') {
+              action = `Pushed ${event.payload.commits?.length || 0} commit(s) to ${event.repo.name}`;
+            } else if (event.type === 'PullRequestEvent') {
+              action = `Opened a pull request in ${event.repo.name}`;
+            } else if (event.type === 'IssuesEvent') {
+              action = `Created an issue in ${event.repo.name}`;
+            } else {
+              action = `Performed ${event.type} in ${event.repo.name}`;
+            }
+            return `<p class="text-sm mb-2">${action} on ${new Date(event.created_at).toLocaleDateString()}</p>`;
+          }).join('');
+          activityContainer.innerHTML = activityList || '<p>No recent activity found.</p>';
+        })
+        .catch(error => {
+          console.error('GitHub Activity Error:', error);
+          activityContainer.innerHTML = '<p>Failed to load activity. Try again later.</p>';
+        });
+    }
+
+    // Scroll Animations
+    const fadeIns = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeIns.forEach(element => observer.observe(element));
+
+    // jQuery Navigation Toggle
+    if (typeof jQuery !== 'undefined') {
+      $(document).ready(function() {
+        $('.nav-toggle').click(function(e) {
+          e.preventDefault();
+          $('.primary-nav').toggleClass('active');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
