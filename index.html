@@ -10,6 +10,7 @@
   <link rel="icon" sizes="144x144" href="images/sam.png">
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
   <style>
     body {
       background-color: #0d0d1a;
@@ -26,7 +27,8 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(0, 255, 255, 0.3));
+      background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(0, 255, 255, 0.3)), url('images/hero-bg.jpg') center/cover no-repeat fixed;
+      background-image: url('https://images.unsplash.com/photo-1534665482403-a909d0d97fd7');
       overflow: hidden;
     }
     #particles {
@@ -91,6 +93,10 @@
       80% { transform: translate(2px, 2px); }
       100% { transform: translate(0); }
     }
+    #trail-chart {
+      max-width: 800px;
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
@@ -103,6 +109,7 @@
         <nav class="navigation">
           <ul class="primary-nav flex space-x-6 text-lg">
             <li><a href="#introduction" class="text-cyan-300 hover:text-pink-500 transition">About Me</a></li>
+            <li><a href="#trail" class="text-cyan-300 hover:text-pink-500 transition">My Trail</a></li>
             <li><a href="#works" class="text-cyan-300 hover:text-pink-500 transition">Latest Works</a></li>
             <li><a href="#activity" class="text-cyan-300 hover:text-pink-500 transition">Activity</a></li>
             <li><a href="#contact" class="text-cyan-300 hover:text-pink-500 transition">Contact Me</a></li>
@@ -143,6 +150,17 @@
             <li>Gaming</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trail Section -->
+  <section id="trail" class="py-16 bg-black fade-in">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-cyan-300 mb-8 glitch">My Trail</h2>
+      <hr class="border-pink-500 mb-8">
+      <div id="trail-chart">
+        <canvas id="journey-chart"></canvas>
       </div>
     </div>
   </section>
@@ -384,6 +402,64 @@
           console.error('GitHub Activity Error:', error);
           activityContainer.innerHTML = '<p>Failed to load activity. Try again later.</p>';
         });
+    }
+
+    // Trail Graph
+    const chartCanvas = document.getElementById('journey-chart');
+    if (chartCanvas) {
+      new Chart(chartCanvas, {
+        type: 'line',
+        data: {
+          labels: ['2018', '2020', '2022', '2023', '2024', '2025'],
+          datasets: [{
+            label: 'My Journey',
+            data: [10, 30, 50, 70, 85, 100],
+            borderColor: '#ff1493',
+            backgroundColor: 'rgba(0, 255, 255, 0.2)',
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#00ffff',
+            pointBorderColor: '#ff1493',
+            pointRadius: 5,
+            pointHoverRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: { title: { display: true, text: 'Year', color: '#e0e0ff' }, grid: { color: 'rgba(255, 20, 147, 0.2)' } },
+            y: { title: { display: true, text: 'Progress', color: '#e0e0ff' }, grid: { color: 'rgba(255, 20, 147, 0.2)' }, min: 0, max: 120 }
+          },
+          plugins: {
+            legend: { labels: { color: '#e0e0ff' } },
+            tooltip: {
+              callbacks: {
+                label: context => {
+                  const labels = [
+                    'Learned Python',
+                    'Started .NET work at MNC',
+                    'Built ConsciousApp',
+                    'Launched ConnectSphere',
+                    'Developed Reality Glitch Detector',
+                    'Still on the Way!'
+                  ];
+                  return labels[context.dataIndex];
+                }
+              }
+            }
+          },
+          animation: {
+            duration: 2000,
+            onProgress: function(animation) {
+              const chart = animation.chart;
+              const lastPoint = chart.data.datasets[0].data.length - 1;
+              chart.data.datasets[0].pointBackgroundColor[lastPoint] = '#00ffff';
+              chart.data.datasets[0].pointRadius[lastPoint] = 8 + Math.sin(Date.now() / 200) * 2; // Pulsing effect
+              chart.update();
+            }
+          }
+        }
+      });
     }
 
     // Scroll Animations
