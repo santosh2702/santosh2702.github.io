@@ -277,6 +277,7 @@
           <a href="https://codepen.io/dashboard/" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-codepen fa-2x"></i></a>
           <a href="https://www.facebook.com/" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-facebook fa-2x"></i></a>
           <a href="https://www.freecodecamp.org/sam2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-free-code-camp fa-2x"></i></a>
+          <a href="https://www.producthunt.com/@santosh2702" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-product-hunt fa-2x"></i></a>
           <a href="https://leetcode.com/u/santdex/" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-code fa-2x"></i></a>
           <a href="https://www.instagram.com/" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-instagram fa-2x"></i></a>
           <a href="https://x.com/" target="_blank" class="text-cyan-300 hover:text-pink-500"><i class="fa fa-twitter fa-2x"></i></a>
@@ -408,10 +409,10 @@
       new Chart(chartCanvas, {
         type: 'line',
         data: {
-          labels: ['2018', '2020', '2022', '2023', '2024', '2025'],
+          labels: ['1997', '2011', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
           datasets: [{
             label: 'My Journey',
-            data: [10, 30, 50, 70, 85, 100],
+            data: [0, 30, 40, 20, 35, 30, 45, 40, 55, 60, 80, 70, 85, 75, 65],
             borderColor: '#ff1493',
             backgroundColor: 'rgba(0, 255, 255, 0.2)',
             fill: true,
@@ -434,12 +435,21 @@
               callbacks: {
                 label: context => {
                   const labels = [
+                    'Born',
+                    'Great academics',
+                    'Completed 10th exam',
+                    'Many failures',
+                    'Completed intermediate',
+                    'Mixed ups and downs',
+                    'Mixed ups and downs',
                     'Learned Python',
                     'Started .NET work at MNC',
-                    'Built ConsciousApp',
-                    'Launched ConnectSphere',
-                    'Developed Reality Glitch Detector',
-                    'Still on the Way!'
+                    'Success',
+                    'Good spike',
+                    'Learning survival instinct in nature (travelling, trekking, mindfulness)',
+                    'Learning survival instinct in nature (travelling, trekking, mindfulness)',
+                    'Learning survival instinct in nature (travelling, trekking, mindfulness)',
+                    'Built ConsciousApp, Launched ConnectSphere, Developed Reality Glitch Detector, Mixed until now, Still on the Way!'
                   ];
                   return labels[context.dataIndex];
                 }
